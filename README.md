@@ -1,3 +1,9 @@
+## ❗ Problem
+
+Managing job applications across multiple platforms is messy and unstructured.
+
+This system provides a centralized backend solution to track applications, monitor interview progress, and analyze outcomes efficiently.
+
 # 🚀 Job Application Tracker API
 
 A production-style backend system to manage job applications, track interview stages, and analyze progress.
@@ -65,6 +71,26 @@ Follows a modular backend architecture:
 * GET `/api/analytics`
 
 ---
+## 📦 Sample Response
+
+GET /api/applications
+
+```json
+[
+  {
+    "companyName": "Google",
+    "role": "Backend Intern",
+    "status": "Interview",
+    "createdAt": "2026-03-21"
+  }
+]
+```
+## 📸 Preview
+![alt text](preview/analytics.png)
+![alt text](preview/application.png)
+![alt text](preview/dashboard.png)
+![alt text](preview/auth.png)
+![alt text](preview/interviewstage.png)
 
 ## 🛠 Run Locally
 
