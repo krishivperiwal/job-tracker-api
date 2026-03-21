@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/dashboard">Job Tracker</a>
+    <nav class="nav-links">
+      <a href="/dashboard">Home</a>
+      <a href="/analytics">Analytics</a>
+      <a href="/applications">Applications</a>
+      <a href="/interviews">Interviews</a>
+    </nav>
+  </header>
+
+  <main class="page two-column-page">
+    <section class="panel">
+      <h1>Login</h1>
+      <form id="loginForm" class="form">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" name="email" type="email" required />
+
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" name="password" type="password" required />
+
+        <button type="submit">Sign In</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h1>Register</h1>
+      <form id="registerForm" class="form">
+        <label for="registerName">Name</label>
+        <input id="registerName" name="name" type="text" required />
+
+        <label for="registerEmail">Email</label>
+        <input id="registerEmail" name="email" type="email" required />
+
+        <label for="registerPassword">Password</label>
+        <input id="registerPassword" name="password" type="password" minlength="6" required />
+
+        <button type="submit">Create Account</button>
+      </form>
+    </section>
+
+    <section class="panel full-width">
+      <p id="authMessage" class="message"></p>
+      <p class="hint">After successful login/register, token is saved and used across all pages.</p>
+    </section>
+  </main>
+
+  <script type="module" src="/js/authPage.js"></script>
+</body>
+</html>

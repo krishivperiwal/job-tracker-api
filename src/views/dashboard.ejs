@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/dashboard">Job Tracker</a>
+    <nav class="nav-links">
+      <a href="/auth">Auth</a>
+      <a href="/analytics">Analytics</a>
+      <a href="/applications">Applications</a>
+      <a href="/interviews">Interviews</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="panel hero-panel">
+      <h1>Clean Workflow Dashboard</h1>
+      <p>Each feature now lives on its own dedicated page for a simple and efficient workflow.</p>
+      <div class="quick-grid">
+        <a class="quick-card" href="/auth"><h2>Authentication</h2><p>Register and login</p></a>
+        <a class="quick-card" href="/analytics"><h2>Analytics</h2><p>View status summary</p></a>
+        <a class="quick-card" href="/applications"><h2>Applications</h2><p>Create and manage applications</p></a>
+        <a class="quick-card" href="/interviews"><h2>Interviews</h2><p>Track interview stages</p></a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Token Manager</h2>
+      <p>Save your JWT once, and all feature pages use it automatically.</p>
+      <label for="tokenField">Access Token</label>
+      <textarea id="tokenField" rows="5" placeholder="Paste JWT token here"></textarea>
+      <div class="actions-row">
+        <button id="saveTokenBtn" type="button">Save Token</button>
+        <button id="clearTokenBtn" type="button" class="ghost">Clear</button>
+      </div>
+      <p id="tokenMessage" class="message"></p>
+    </section>
+  </main>
+
+  <script type="module" src="/js/dashboardPage.js"></script>
+</body>
+</html>

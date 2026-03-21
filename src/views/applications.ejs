@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/dashboard">Job Tracker</a>
+    <nav class="nav-links">
+      <a href="/auth">Auth</a>
+      <a href="/analytics">Analytics</a>
+      <a href="/interviews">Interviews</a>
+    </nav>
+  </header>
+
+  <main class="page two-column-page">
+    <section class="panel">
+      <h1>Create Application</h1>
+      <form id="createApplicationForm" class="form">
+        <label>Company Name</label>
+        <input name="companyName" type="text" required />
+
+        <label>Role</label>
+        <input name="role" type="text" required />
+
+        <label>Status</label>
+        <select name="status">
+          <option>Applied</option>
+          <option>Interview</option>
+          <option>Offer</option>
+          <option>Rejected</option>
+          <option>Ghosted</option>
+        </select>
+
+        <label>Job Link</label>
+        <input name="jobLink" type="url" />
+
+        <label>Notes</label>
+        <textarea name="notes" rows="3"></textarea>
+
+        <button type="submit">Create</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Manage Application</h2>
+
+      <form id="updateApplicationForm" class="form compact-form">
+        <label>Application ID</label>
+        <input name="id" type="text" required />
+
+        <label>New Status</label>
+        <select name="status">
+          <option>Applied</option>
+          <option>Interview</option>
+          <option>Offer</option>
+          <option>Rejected</option>
+          <option>Ghosted</option>
+        </select>
+
+        <button type="submit">Update Status</button>
+      </form>
+
+      <form id="deleteApplicationForm" class="form compact-form">
+        <label>Application ID</label>
+        <input name="id" type="text" required />
+        <button type="submit" class="danger">Delete</button>
+      </form>
+
+      <form id="uploadResumeForm" class="form compact-form" enctype="multipart/form-data">
+        <label>Application ID</label>
+        <input name="id" type="text" required />
+
+        <label>Resume File</label>
+        <input name="resume" type="file" required />
+
+        <button type="submit">Upload Resume</button>
+      </form>
+
+      <button id="loadApplicationsBtn" type="button">Load Applications</button>
+    </section>
+
+    <section class="panel full-width">
+      <p id="applicationsMessage" class="message"></p>
+      <div id="applicationsList" class="list-grid"></div>
+    </section>
+  </main>
+
+  <script type="module" src="/js/applicationsPage.js"></script>
+</body>
+</html>

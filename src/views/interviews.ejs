@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/dashboard">Job Tracker</a>
+    <nav class="nav-links">
+      <a href="/auth">Auth</a>
+      <a href="/analytics">Analytics</a>
+      <a href="/applications">Applications</a>
+    </nav>
+  </header>
+
+  <main class="page two-column-page">
+    <section class="panel">
+      <h1>Add Interview Stage</h1>
+      <form id="addInterviewForm" class="form">
+        <label>Application ID</label>
+        <input name="applicationId" type="text" required />
+
+        <label>Stage Name</label>
+        <input name="stageName" type="text" required />
+
+        <label>Scheduled Date</label>
+        <input name="scheduledDate" type="date" />
+
+        <label>Result</label>
+        <select name="result">
+          <option>Pending</option>
+          <option>Passed</option>
+          <option>Failed</option>
+        </select>
+
+        <label>Notes</label>
+        <textarea name="notes" rows="3"></textarea>
+
+        <button type="submit">Add Stage</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Manage Interview</h2>
+      <form id="updateInterviewForm" class="form compact-form">
+        <label>Interview ID</label>
+        <input name="interviewId" type="text" required />
+
+        <label>Result</label>
+        <select name="result">
+          <option>Pending</option>
+          <option>Passed</option>
+          <option>Failed</option>
+        </select>
+
+        <button type="submit">Update</button>
+      </form>
+
+      <form id="deleteInterviewForm" class="form compact-form">
+        <label>Interview ID</label>
+        <input name="interviewId" type="text" required />
+        <button type="submit" class="danger">Delete</button>
+      </form>
+
+      <form id="listInterviewForm" class="form compact-form">
+        <label>Application ID</label>
+        <input name="applicationId" type="text" required />
+        <button type="submit">Load Interview Stages</button>
+      </form>
+    </section>
+
+    <section class="panel full-width">
+      <p id="interviewsMessage" class="message"></p>
+      <div id="interviewsList" class="list-grid"></div>
+    </section>
+  </main>
+
+  <script type="module" src="/js/interviewsPage.js"></script>
+</body>
+</html>
