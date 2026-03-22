@@ -86,12 +86,11 @@ GET /api/applications
 ]
 ```
 ## 📸 Preview
-![alt text](preview/analytics.png)
-![alt text](preview/aplication.png)
-![alt text](preview/dashboard.png)
-![alt text](preview/auth.png)
-![alt text](preview/interviewstage.png)
-
+![Analytics Dashboard](preview/analytics.png)
+![Applications Page](preview/application.png)
+![Authentication Page](preview/auth.png)
+![Dashboard Home](preview/dashboard.png)
+![Interview Stages](preview/interviewstage.png)
 ## 🛠 Run Locally
 
 ```bash
