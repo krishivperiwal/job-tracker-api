@@ -99,10 +99,19 @@ Create a `.env` file using `.env.example`
 ---
 ## 📸 Preview
 
+### Analytics Dashboard
 ![Analytics Dashboard](preview/analytics.png)
+
+### Applications Page
 ![Applications Page](preview/application.png)
+
+### Authentication Page
 ![Authentication Page](preview/auth.png)
+
+### Dashboard Home
 ![Dashboard Home](preview/dashboard.png)
+
+### Interview Stages
 ![Interview Stages](preview/interviewstage.png)
 
 ## 📌 API Base URL
