@@ -85,12 +85,6 @@ GET /api/applications
   }
 ]
 ```
-## 📸 Preview
-![Analytics Dashboard](preview/analytics.png)
-![Applications Page](preview/application.png)
-![Authentication Page](preview/auth.png)
-![Dashboard Home](preview/dashboard.png)
-![Interview Stages](preview/interviewstage.png)
 ## 🛠 Run Locally
 
 ```bash
@@ -103,6 +97,13 @@ npm run start
 Create a `.env` file using `.env.example`
 
 ---
+## 📸 Preview
+
+![Analytics Dashboard](preview/analytics.png)
+![Applications Page](preview/application.png)
+![Authentication Page](preview/auth.png)
+![Dashboard Home](preview/dashboard.png)
+![Interview Stages](preview/interviewstage.png)
 
 ## 📌 API Base URL
 
