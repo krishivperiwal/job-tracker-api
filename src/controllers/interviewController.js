@@ -1,11 +1,16 @@
 const InterviewStage = require("../models/InterviewStage");
 const Application = require("../models/Application");
 const AppError = require("../utils/appError");
+const mongoose = require("mongoose");
 
 const addInterviewStage = async (req, res, next) => {
   try {
 
     const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new AppError("Invalid application ID format", 400);
+    }
 
     const application = await Application.findOne({
       _id: id,
@@ -32,6 +37,10 @@ const getInterviewStages = async (req, res, next) => {
   try {
 
     const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new AppError("Invalid application ID format", 400);
+    }
 
     const application = await Application.findOne({
       _id: id,

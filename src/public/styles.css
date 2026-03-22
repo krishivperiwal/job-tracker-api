@@ -85,9 +85,7 @@ body {
 .form input,
 .form textarea,
 .form select,
-.form button,
-textarea,
-button {
+textarea {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #d1d5db;
@@ -96,13 +94,22 @@ button {
   background: #fff;
 }
 
-button {
-  width: auto;
-  background: #2563eb;
+button,
+.form button {
+  padding: 10px 12px;
   border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: #2563eb;
   color: #fff;
   cursor: pointer;
   font-weight: 600;
+  width: auto;
+}
+
+.form button {
+  width: 100%;
+  margin-top: 8px;
 }
 
 .actions-row {

@@ -1,4 +1,5 @@
 const Application = require("../models/Application");
+const mongoose = require("mongoose");
 
 const getAnalytics = async (req, res, next) => {
   try {
@@ -7,7 +8,7 @@ const getAnalytics = async (req, res, next) => {
 
     const stats = await Application.aggregate([
       {
-        $match: { userId: new require("mongoose").Types.ObjectId(userId) }
+        $match: { userId: new mongoose.Types.ObjectId(userId) }
       },
       {
         $group: {

@@ -11,10 +11,14 @@ const {
 
 const router = express.Router();
 
-router.post("/applications/:id/interviews", protect, addInterviewStage);
-router.get("/applications/:id/interviews", protect, getInterviewStages);
+const asyncHandler = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
 
-router.patch("/interviews/:id", protect, updateInterviewStage);
-router.delete("/interviews/:id", protect, deleteInterviewStage);
+router.post("/applications/:id/interviews", protect, asyncHandler(addInterviewStage));
+router.get("/applications/:id/interviews", protect, asyncHandler(getInterviewStages));
+
+router.patch("/interviews/:id", protect, asyncHandler(updateInterviewStage));
+router.delete("/interviews/:id", protect, asyncHandler(deleteInterviewStage));
 
 module.exports = router;

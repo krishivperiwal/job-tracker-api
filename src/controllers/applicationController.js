@@ -1,6 +1,7 @@
 const Application = require("../models/Application");
 const cloudinary = require("../config/cloudinary");
 const AppError = require("../utils/appError");
+const mongoose = require("mongoose");
 
 const createApplication = async (req, res, next) => {
   try {
@@ -58,6 +59,10 @@ const getApplications = async (req, res, next) => {
 const getApplicationById = async (req, res, next) => {
   try {
 
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      throw new AppError("Invalid application ID format", 400);
+    }
+
     const application = await Application.findOne({
       _id: req.params.id,
       userId: req.user.userId
@@ -76,6 +81,10 @@ const getApplicationById = async (req, res, next) => {
 
 const updateApplication = async (req, res, next) => {
   try {
+
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      throw new AppError("Invalid application ID format", 400);
+    }
 
     const application = await Application.findOneAndUpdate(
       {
@@ -100,6 +109,10 @@ const updateApplication = async (req, res, next) => {
 const deleteApplication = async (req, res, next) => {
   try {
 
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      throw new AppError("Invalid application ID format", 400);
+    }
+
     const application = await Application.findOneAndDelete({
       _id: req.params.id,
       userId: req.user.userId
@@ -120,6 +133,10 @@ const uploadResume = async (req, res, next) => {
   try {
 
     const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new AppError("Invalid application ID format", 400);
+    }
 
     const application = await Application.findOne({
       _id: id,

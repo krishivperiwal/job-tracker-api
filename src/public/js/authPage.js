@@ -15,8 +15,13 @@ const handleAuth = async (form, endpoint, successText) => {
       setToken(data.token);
     }
 
-    setMessage(message, `${successText} Token saved.`, "success");
+    setMessage(message, `${successText} Token saved. Redirecting to dashboard...`, "success");
     form.reset();
+    
+    // Redirect to dashboard after 1 second
+    setTimeout(() => {
+      window.location.href = "/dashboard";
+    }, 1000);
   } catch (error) {
     setMessage(message, error.message, "error");
   }

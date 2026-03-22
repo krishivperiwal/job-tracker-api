@@ -12,11 +12,15 @@ const {
 
 const router = express.Router();
 
-router.post("/", protect, createApplication);
-router.get("/", protect, getApplications);
-router.get("/:id", protect, getApplicationById);
-router.patch("/:id", protect, updateApplication);
-router.delete("/:id", protect, deleteApplication);
-router.post("/:id/upload-resume", protect, upload.single("resume"), uploadResume);
+const asyncHandler = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+
+router.post("/", protect, asyncHandler(createApplication));
+router.get("/", protect, asyncHandler(getApplications));
+router.get("/:id", protect, asyncHandler(getApplicationById));
+router.patch("/:id", protect, asyncHandler(updateApplication));
+router.delete("/:id", protect, asyncHandler(deleteApplication));
+router.post("/:id/upload-resume", protect, upload.single("resume"), asyncHandler(uploadResume));
 
 module.exports = router;

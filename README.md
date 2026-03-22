@@ -87,7 +87,7 @@ GET /api/applications
 ```
 ## 📸 Preview
 ![alt text](preview/analytics.png)
-![alt text](preview/application.png)
+![alt text](preview/aplication.png)
 ![alt text](preview/dashboard.png)
 ![alt text](preview/auth.png)
 ![alt text](preview/interviewstage.png)
