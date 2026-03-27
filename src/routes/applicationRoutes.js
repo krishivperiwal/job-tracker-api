@@ -1,26 +1,22 @@
-const express = require("express");
-const protect = require("../middlewares/authMiddleware");
-const upload = require("../middlewares/uploadMiddleware");
-const {
+import express from "express";
+import { protect } from "../middlewares/authMiddleware.js";
+import upload from "../middlewares/uploadMiddleware.js";
+import {
   createApplication,
   getApplications,
   getApplicationById,
   updateApplication,
   deleteApplication,
   uploadResume
-} = require("../controllers/applicationController");
+} from "../controllers/applicationController.js";
 
 const router = express.Router();
 
-const asyncHandler = (fn) => (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(next);
-};
+router.post("/", protect, createApplication);
+router.get("/", protect, getApplications);
+router.get("/:id", protect, getApplicationById);
+router.patch("/:id", protect, updateApplication);
+router.delete("/:id", protect, deleteApplication);
+router.post("/:id/upload-resume", protect, upload.single("resume"), uploadResume);
 
-router.post("/", protect, asyncHandler(createApplication));
-router.get("/", protect, asyncHandler(getApplications));
-router.get("/:id", protect, asyncHandler(getApplicationById));
-router.patch("/:id", protect, asyncHandler(updateApplication));
-router.delete("/:id", protect, asyncHandler(deleteApplication));
-router.post("/:id/upload-resume", protect, upload.single("resume"), asyncHandler(uploadResume));
-
-module.exports = router;
+export default router;

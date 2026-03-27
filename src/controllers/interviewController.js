@@ -1,109 +1,78 @@
-const InterviewStage = require("../models/InterviewStage");
-const Application = require("../models/Application");
-const AppError = require("../utils/appError");
-const mongoose = require("mongoose");
+import InterviewStage from "../models/InterviewStage.js";
+import Application from "../models/Application.js";
+import AppError from "../utils/appError.js";
+import asyncHandler from "../utils/asyncHandler.js";
+import mongoose from "mongoose";
 
-const addInterviewStage = async (req, res, next) => {
-  try {
+export const addInterviewStage = asyncHandler(async (req, res) => {
+  const { id } = req.params;
 
-    const { id } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      throw new AppError("Invalid application ID format", 400);
-    }
-
-    const application = await Application.findOne({
-      _id: id,
-      userId: req.user.userId
-    });
-
-    if (!application) {
-      throw new AppError("Application not found", 404);
-    }
-
-    const interview = await InterviewStage.create({
-      ...req.body,
-      applicationId: id
-    });
-
-    res.status(201).json(interview);
-
-  } catch (error) {
-    next(error);
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new AppError("Invalid application ID format", 400);
   }
-};
 
-const getInterviewStages = async (req, res, next) => {
-  try {
+  const application = await Application.findOne({
+    _id: id,
+    userId: req.user.id
+  });
 
-    const { id } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      throw new AppError("Invalid application ID format", 400);
-    }
-
-    const application = await Application.findOne({
-      _id: id,
-      userId: req.user.userId
-    });
-
-    if (!application) {
-      throw new AppError("Application not found", 404);
-    }
-
-    const interviews = await InterviewStage.find({
-      applicationId: id
-    });
-
-    res.json(interviews);
-
-  } catch (error) {
-    next(error);
+  if (!application) {
+    throw new AppError("Application not found", 404);
   }
-};
 
-const updateInterviewStage = async (req, res, next) => {
-  try {
+  const interview = await InterviewStage.create({
+    ...req.body,
+    applicationId: id
+  });
 
-    const interview = await InterviewStage.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+  res.status(201).json(interview);
+});
 
-    if (!interview) {
-      throw new AppError("Interview not found", 404);
-    }
+export const getInterviewStages = asyncHandler(async (req, res) => {
+  const { id } = req.params;
 
-    res.json(interview);
-
-  } catch (error) {
-    next(error);
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new AppError("Invalid application ID format", 400);
   }
-};
 
-const deleteInterviewStage = async (req, res, next) => {
-  try {
+  const application = await Application.findOne({
+    _id: id,
+    userId: req.user.id
+  });
 
-    const interview = await InterviewStage.findByIdAndDelete(req.params.id);
-
-    if (!interview) {
-      throw new AppError("Interview not found", 404);
-    }
-
-    res.json({
-      message: "Interview deleted"
-    });
-
-  } catch (error) {
-    next(error);
+  if (!application) {
+    throw new AppError("Application not found", 404);
   }
-};
 
+  const interviews = await InterviewStage.find({
+    applicationId: id
+  });
 
-module.exports = {
-  addInterviewStage,
-  getInterviewStages,
-  updateInterviewStage,
-  deleteInterviewStage
-};
+  res.json(interviews);
+});
+
+export const updateInterviewStage = asyncHandler(async (req, res) => {
+  const interview = await InterviewStage.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+
+  if (!interview) {
+    throw new AppError("Interview not found", 404);
+  }
+
+  res.json(interview);
+});
+
+export const deleteInterviewStage = asyncHandler(async (req, res) => {
+  const interview = await InterviewStage.findByIdAndDelete(req.params.id);
+
+  if (!interview) {
+    throw new AppError("Interview not found", 404);
+  }
+
+  res.json({
+    message: "Interview deleted"
+  });
+});

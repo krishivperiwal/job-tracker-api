@@ -1,22 +1,20 @@
-const jwt = require("jsonwebtoken");
-const AppError = require("../utils/appError");
+import jwt from "jsonwebtoken";
+import AppError from "../utils/appError.js";
 
-const protect = (req, res, next) => {
+export const protect = (req, res, next) => {
   let token;
 
   const authHeader = req.headers.authorization;
 
   if (authHeader && authHeader.startsWith("Bearer")) {
     try {
-
       token = authHeader.split(" ")[1];
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      req.user = decoded;
+      req.user = { id: decoded.id, email: decoded.email, role: decoded.role };
 
       next();
-
     } catch (error) {
       return next(new AppError("Not authorized, token failed", 401));
     }
@@ -26,5 +24,3 @@ const protect = (req, res, next) => {
     return next(new AppError("Not authorized, no token", 401));
   }
 };
-
-module.exports = protect;   

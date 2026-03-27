@@ -1,24 +1,18 @@
-const express = require("express");
-
-const protect = require("../middlewares/authMiddleware");
-
-const {
+import express from "express";
+import { protect } from "../middlewares/authMiddleware.js";
+import {
   addInterviewStage,
   getInterviewStages,
   updateInterviewStage,
   deleteInterviewStage
-} = require("../controllers/interviewController");
+} from "../controllers/interviewController.js";
 
 const router = express.Router();
 
-const asyncHandler = (fn) => (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(next);
-};
+router.post("/applications/:id/interviews", protect, addInterviewStage);
+router.get("/applications/:id/interviews", protect, getInterviewStages);
 
-router.post("/applications/:id/interviews", protect, asyncHandler(addInterviewStage));
-router.get("/applications/:id/interviews", protect, asyncHandler(getInterviewStages));
+router.patch("/interviews/:id", protect, updateInterviewStage);
+router.delete("/interviews/:id", protect, deleteInterviewStage);
 
-router.patch("/interviews/:id", protect, asyncHandler(updateInterviewStage));
-router.delete("/interviews/:id", protect, asyncHandler(deleteInterviewStage));
-
-module.exports = router;
+export default router;

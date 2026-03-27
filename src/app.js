@@ -1,13 +1,18 @@
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-const authRoutes = require("./routes/authRoutes");
-const applicationRoutes = require("./routes/applicationRoutes");
-const interviewRoutes = require("./routes/interviewRoutes");
-const analyticsRoutes = require("./routes/analyticsRoutes");
-const viewRoutes = require("./routes/viewRoutes");
-const apiLimiter = require("./middlewares/rateLimiter");
-const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
+import express from "express";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+
+import authRoutes from "./routes/authRoutes.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
+import interviewRoutes from "./routes/interviewRoutes.js";
+import analyticsRoutes from "./routes/analyticsRoutes.js";
+import viewRoutes from "./routes/viewRoutes.js";
+import apiLimiter from "./middlewares/rateLimiter.js";
+import { notFound, errorHandler } from "./middlewares/errorMiddleware.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -24,8 +29,8 @@ app.use("/", viewRoutes);
 app.use("/api", apiLimiter);     
 app.use("/api", analyticsRoutes);
 app.use("/api", interviewRoutes);
-app.use("/api/auth",authRoutes);
-app.use("/api/applications",applicationRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/applications", applicationRoutes);
 
 app.get("/", (req, res) => {
   res.send("Job Tracker API running");
@@ -34,4 +39,4 @@ app.get("/", (req, res) => {
 app.use(notFound);
 app.use(errorHandler);
 
-module.exports = app;
+export default app;

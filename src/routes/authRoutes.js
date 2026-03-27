@@ -1,13 +1,9 @@
-const express = require("express");
-const {registerUser,loginUser} = require("../controllers/authController");
+import express from "express";
+import { registerUser, loginUser } from "../controllers/authController.js";
 
 const router = express.Router();
 
-const asyncHandler = (fn) => (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(next);
-};
+router.post("/register", registerUser);
+router.post("/login", loginUser);
 
-router.post("/register", asyncHandler(registerUser));
-router.post("/login", asyncHandler(loginUser));
-
-module.exports = router;
+export default router;

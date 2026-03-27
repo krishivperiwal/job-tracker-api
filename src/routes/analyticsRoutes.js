@@ -1,14 +1,9 @@
-const express = require("express");
-const protect = require("../middlewares/authMiddleware");
-
-const { getAnalytics } = require("../controllers/analyticsController");
+import express from "express";
+import { protect } from "../middlewares/authMiddleware.js";
+import { getAnalytics } from "../controllers/analyticsController.js";
 
 const router = express.Router();
 
-const asyncHandler = (fn) => (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(next);
-};
+router.get("/analytics", protect, getAnalytics);
 
-router.get("/analytics", protect, asyncHandler(getAnalytics));
-
-module.exports = router;
+export default router;

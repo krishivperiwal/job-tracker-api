@@ -1,4 +1,4 @@
-const rateLimit = require("express-rate-limit");
+import rateLimit from "express-rate-limit";
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -6,6 +6,7 @@ const apiLimiter = rateLimit({
   max: 100, 
 
   message: {
+    status: "fail",
     message: "Too many requests, please try again later."
   },
 
@@ -13,4 +14,4 @@ const apiLimiter = rateLimit({
   legacyHeaders: false
 });
 
-module.exports = apiLimiter;
+export default apiLimiter;

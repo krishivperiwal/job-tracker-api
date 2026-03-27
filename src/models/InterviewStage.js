@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const interviewStageSchema = new mongoose.Schema(
   {
@@ -33,4 +33,6 @@ const interviewStageSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("InterviewStage", interviewStageSchema);
+const InterviewStage = mongoose.model("InterviewStage", interviewStageSchema);
+
+export default InterviewStage;

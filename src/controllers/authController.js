@@ -1,75 +1,60 @@
-const User = require("../models/User");
-const generateToken = require("../utils/generateToken");
-const AppError = require("../utils/appError");
+import User from "../models/User.js";
+import generateToken from "../utils/generateToken.js";
+import AppError from "../utils/appError.js";
+import asyncHandler from "../utils/asyncHandler.js";
 
-const registerUser = async (req, res, next) => {
-  try {
+export const registerUser = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
 
-    const { name, email, password } = req.body;
+  const existingUser = await User.findOne({ email });
 
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
-      throw new AppError("User already exists", 400);
-    }
-
-    const user = await User.create({
-      name,
-      email,
-      password
-    });
-
-    const token = generateToken(user);
-
-    res.status(201).json({
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role
-      },
-      token
-    });
-
-  } catch (error) {
-    next(error);
+  if (existingUser) {
+    throw new AppError("User already exists", 400);
   }
-};
 
+  const user = await User.create({
+    name,
+    email,
+    password
+  });
 
-const loginUser = async (req, res, next) => {
-  try {
+  const token = generateToken(user);
 
-    const { email, password } = req.body;
+  res.status(201).json({
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    },
+    token
+  });
+});
 
-    const user = await User.findOne({ email });
+export const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
 
-    if (!user) {
-      throw new AppError("Invalid credentials", 401);
-    }
+  const user = await User.findOne({ email });
 
-    const isMatch = await user.comparePassword(password);
-
-    if (!isMatch) {
-      throw new AppError("Invalid credentials", 401);
-    }
-
-    const token = generateToken(user);
-
-    res.json({
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role
-      },
-      token
-    });
-
-  } catch (error) {
-    next(error);
+  if (!user) {
+    throw new AppError("Invalid credentials", 401);
   }
-};
 
+  const isMatch = await user.matchPassword(password);
 
-module.exports = {registerUser,loginUser};
+  if (!isMatch) {
+    throw new AppError("Invalid credentials", 401);
+  }
+
+  const token = generateToken(user);
+
+  res.json({
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    },
+    token
+  });
+});
