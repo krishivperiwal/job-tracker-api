@@ -1,3 +1,9 @@
+# 🚀 Job Application Tracker API
+
+A production-style backend system to manage job applications, track interview stages, and analyze progress.
+
+---
+
 ## Live Demo
 Frontend: [job-tracker-client-ten.vercel.app](https://job-tracker-client-ten.vercel.app)
 
@@ -9,10 +15,6 @@ Frontend: [job-tracker-client-ten.vercel.app](https://job-tracker-client-ten.ver
 Managing job applications across multiple platforms is messy and unstructured.
 
 This system provides a centralized backend solution to track applications, monitor interview progress, and analyze outcomes efficiently.
-
-# 🚀 Job Application Tracker API
-
-A production-style backend system to manage job applications, track interview stages, and analyze progress.
 
 ---
 
